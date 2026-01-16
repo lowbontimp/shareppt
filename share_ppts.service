@@ -1,0 +1,16 @@
+[Unit]
+Description=Share PPTs Gunicorn daemon
+After=network.target
+
+[Service]
+User=nginx
+Group=nginx
+WorkingDirectory=/home/hbim/works/14.share_ppt/01
+Environment="PATH=/usr/local/bin:/usr/bin:/bin:/home/hbim/.local/bin"
+Environment="PYTHONPATH=/home/hbim/.local/lib/python3.9/site-packages:/usr/local/lib/python3.9/site-packages"
+ExecStart=/usr/bin/python3 -m gunicorn --workers 4 --bind 127.0.0.1:5000 --timeout 120 app:app
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
